@@ -10,12 +10,14 @@ const PORT = process.env.PORT || 5000;
 // --- Middlewares ---
 app.use(express.json());
 
-const ALLOWED_ORIGIN = process.env.CLIENT_URL || 'http://localhost:5173';
 app.use(cors({
-  origin: ALLOWED_ORIGIN, // Cho phép Frontend Vite gọi vào
+  origin: [
+    'http://localhost:5173',                          
+    'https://jwt-auth-frontend-hidebray.netlify.app',  
+    process.env.FRONTEND_URL              
+  ].filter(Boolean),                 
   credentials: true
 }));
-
 // --- Test Route (Để kiểm tra server có sống không) ---
 app.get('/', (req, res) => {
   res.send('✅ Server Backend đang chạy ổn định!');
