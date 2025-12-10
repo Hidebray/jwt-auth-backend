@@ -9,8 +9,10 @@ const PORT = process.env.PORT || 5000;
 
 // --- Middlewares ---
 app.use(express.json());
+
+const ALLOWED_ORIGIN = process.env.CLIENT_URL || 'http://localhost:5173';
 app.use(cors({
-  origin: 'http://localhost:5173', // Cho phép Frontend Vite gọi vào
+  origin: ALLOWED_ORIGIN, // Cho phép Frontend Vite gọi vào
   credentials: true
 }));
 
